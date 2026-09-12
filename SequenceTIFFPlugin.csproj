@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>SequenceTIFFPlugin</AssemblyName>
+    <RootNamespace>SequenceTIFFPlugin</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>Wea017net</Authors>
+    <Copyright>Copyright (c) 2026 Wea017net</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>連番TIFFを図形アイテムとして読み込むYukkuriMovieMaker4用プラグイン</Description>
+    <NuGetAudit>false</NuGetAudit>
+
+    <!-- PDBに開発環境の絶対パスを含めない。 -->
+    <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))</RepoRoot>
+    <PathMap>$(RepoRoot)=.</PathMap>
+  </PropertyGroup>
+
+  <Target Name="ValidateYMM4DirPath" BeforeTargets="ResolveAssemblyReferences">
+    <Error
+      Condition="!Exists('$(YMM4DirPath)YukkuriMovieMaker.Plugin.dll')"
+      Text="YMM4DirPathが未設定か不正です。Directory.Build.props.exampleをDirectory.Build.propsへコピーし、YMM4DirPathを設定してください。" />
+  </Target>
+
+  <ItemGroup>
+    <Compile Remove="tests\**\*.cs" />
+
+    <Reference Include="YukkuriMovieMaker.Controls">
+      <HintPath>$(YMM4DirPath)YukkuriMovieMaker.Controls.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="YukkuriMovieMaker.Plugin">
+      <HintPath>$(YMM4DirPath)YukkuriMovieMaker.Plugin.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SharpGen.Runtime">
+      <HintPath>$(YMM4DirPath)SharpGen.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SharpGen.Runtime.COM">
+      <HintPath>$(YMM4DirPath)SharpGen.Runtime.COM.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Vortice.Direct2D1">
+      <HintPath>$(YMM4DirPath)Vortice.Direct2D1.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Vortice.DirectX">
+      <HintPath>$(YMM4DirPath)Vortice.DirectX.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Vortice.Mathematics">
+      <HintPath>$(YMM4DirPath)Vortice.Mathematics.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

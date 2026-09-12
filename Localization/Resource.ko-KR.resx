@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="PluginName" xml:space="preserve"><value>TIFF 이미지 시퀀스</value></data>
+  <data name="FirstFileName" xml:space="preserve"><value>첫 번째 이미지 파일</value></data>
+  <data name="FirstFileDescription" xml:space="preserve"><value>파일 이름 끝의 숫자를 연속 번호로 인식하여 같은 폴더의 TIFF 이미지를 숫자 순서로 불러옵니다.</value></data>
+  <data name="PlaybackStartName" xml:space="preserve"><value>재생 시작 위치</value></data>
+  <data name="PlaybackStartDescription" xml:space="preserve"><value>연속 이미지의 몇 번째 이미지부터 재생할지 1부터 시작하는 번호로 지정합니다.</value></data>
+  <data name="FrameRateName" xml:space="preserve"><value>프레임 속도</value></data>
+  <data name="FrameRateDescription" xml:space="preserve"><value>1초 동안 표시할 TIFF 시퀀스 이미지 수를 지정합니다.</value></data>
+  <data name="FrameUnit" xml:space="preserve"><value>프레임</value></data>
+  <data name="FpsUnit" xml:space="preserve"><value>fps</value></data>
+  <data name="TiffFilterName" xml:space="preserve"><value>TIFF 이미지</value></data>
+</root>

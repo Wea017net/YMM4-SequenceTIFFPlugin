@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="PluginName" xml:space="preserve"><value>Secuencia de imágenes TIFF</value></data>
+  <data name="FirstFileName" xml:space="preserve"><value>Primer archivo de imagen</value></data>
+  <data name="FirstFileDescription" xml:space="preserve"><value>Interpreta los dígitos finales del nombre del archivo como número de secuencia y carga las imágenes TIFF de la misma carpeta en orden numérico.</value></data>
+  <data name="PlaybackStartName" xml:space="preserve"><value>Inicio de reproducción</value></data>
+  <data name="PlaybackStartDescription" xml:space="preserve"><value>Indica desde qué imagen de la secuencia se inicia la reproducción; la numeración empieza en 1.</value></data>
+  <data name="FrameRateName" xml:space="preserve"><value>Velocidad de fotogramas</value></data>
+  <data name="FrameRateDescription" xml:space="preserve"><value>Establece el número de imágenes de la secuencia TIFF que se muestran por segundo.</value></data>
+  <data name="FrameUnit" xml:space="preserve"><value>fotograma</value></data>
+  <data name="FpsUnit" xml:space="preserve"><value>fps</value></data>
+  <data name="TiffFilterName" xml:space="preserve"><value>Imágenes TIFF</value></data>
+</root>

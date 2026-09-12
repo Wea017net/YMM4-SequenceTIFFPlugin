@@ -1,0 +1,17 @@
+bin/
+obj/
+dist/
+TestResults/
+.vs/
+.idea/
+.vscode/
+Directory.Build.props
+*.user
+*.suo
+*.userprefs
+*.log
+*.nupkg
+*.snupkg
+*.ymme
+.DS_Store
+Thumbs.db

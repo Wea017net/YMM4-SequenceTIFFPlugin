@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="PluginName" xml:space="preserve"><value>連番TIFF画像</value></data>
+  <data name="FirstFileName" xml:space="preserve"><value>1枚目のファイル</value></data>
+  <data name="FirstFileDescription" xml:space="preserve"><value>ファイル名末尾の数字を連番として、同じフォルダーのTIFF画像を数値順に読み込みます。</value></data>
+  <data name="PlaybackStartName" xml:space="preserve"><value>再生開始位置</value></data>
+  <data name="PlaybackStartDescription" xml:space="preserve"><value>連番画像の何枚目から再生を開始するかを1始まりで指定します。</value></data>
+  <data name="FrameRateName" xml:space="preserve"><value>フレームレート</value></data>
+  <data name="FrameRateDescription" xml:space="preserve"><value>連番TIFFを1秒間に何枚進めるかを整数で指定します。</value></data>
+  <data name="FrameUnit" xml:space="preserve"><value>フレーム</value></data>
+  <data name="FpsUnit" xml:space="preserve"><value>fps</value></data>
+  <data name="TiffFilterName" xml:space="preserve"><value>TIFF画像</value></data>
+</root>

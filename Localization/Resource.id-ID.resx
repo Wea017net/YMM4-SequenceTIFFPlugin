@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="PluginName" xml:space="preserve"><value>Urutan Gambar TIFF</value></data>
+  <data name="FirstFileName" xml:space="preserve"><value>File gambar pertama</value></data>
+  <data name="FirstFileDescription" xml:space="preserve"><value>Menganggap angka di akhir nama file sebagai nomor urut, lalu memuat gambar TIFF dalam folder yang sama berdasarkan urutan angka.</value></data>
+  <data name="PlaybackStartName" xml:space="preserve"><value>Posisi mulai pemutaran</value></data>
+  <data name="PlaybackStartDescription" xml:space="preserve"><value>Menentukan gambar keberapa sebagai awal pemutaran urutan, dimulai dari 1.</value></data>
+  <data name="FrameRateName" xml:space="preserve"><value>Laju bingkai</value></data>
+  <data name="FrameRateDescription" xml:space="preserve"><value>Menentukan jumlah gambar urutan TIFF yang ditampilkan per detik.</value></data>
+  <data name="FrameUnit" xml:space="preserve"><value>bingkai</value></data>
+  <data name="FpsUnit" xml:space="preserve"><value>fps</value></data>
+  <data name="TiffFilterName" xml:space="preserve"><value>Gambar TIFF</value></data>
+</root>

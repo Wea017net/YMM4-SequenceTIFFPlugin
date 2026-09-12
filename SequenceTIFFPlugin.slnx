@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SequenceTIFFPlugin.csproj" />
+  <Project Path="tests/SequenceTIFFPlugin.SmokeTests.csproj" />
+</Solution>

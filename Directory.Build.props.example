@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- 末尾のバックスラッシュを付けてください。 -->
+    <YMM4DirPath>C:\Path\To\YukkuriMovieMaker4\</YMM4DirPath>
+  </PropertyGroup>
+</Project>

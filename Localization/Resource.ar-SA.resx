@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="PluginName" xml:space="preserve"><value>تسلسل صور TIFF</value></data>
+  <data name="FirstFileName" xml:space="preserve"><value>ملف الصورة الأولى</value></data>
+  <data name="FirstFileDescription" xml:space="preserve"><value>يُعامل الرقم الموجود في نهاية اسم الملف كرقم تسلسلي، وتُحمّل صور TIFF من المجلد نفسه بالترتيب الرقمي.</value></data>
+  <data name="PlaybackStartName" xml:space="preserve"><value>موضع بدء التشغيل</value></data>
+  <data name="PlaybackStartDescription" xml:space="preserve"><value>يحدد الصورة التي يبدأ منها تشغيل التسلسل بترقيم يبدأ من 1.</value></data>
+  <data name="FrameRateName" xml:space="preserve"><value>معدل الإطارات</value></data>
+  <data name="FrameRateDescription" xml:space="preserve"><value>يحدد عدد صور تسلسل TIFF التي يتم عرضها في الثانية.</value></data>
+  <data name="FrameUnit" xml:space="preserve"><value>إطار</value></data>
+  <data name="FpsUnit" xml:space="preserve"><value>إطار/ث</value></data>
+  <data name="TiffFilterName" xml:space="preserve"><value>صور TIFF</value></data>
+</root>

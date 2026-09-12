@@ -1,0 +1,11 @@
+* text=auto
+
+*.cs text eol=lf
+*.csproj text eol=lf
+*.slnx text eol=lf
+*.resx text eol=lf
+*.md text eol=lf
+*.ps1 text eol=crlf
+
+*.dll binary
+*.ymme binary
