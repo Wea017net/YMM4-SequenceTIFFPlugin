@@ -1,7 +1,12 @@
 bin/
 obj/
+artifacts/
 dist/
 TestResults/
+coverage/
+BenchmarkDotNet.Artifacts/
+.nuget/
+packages/
 .vs/
 .idea/
 .vscode/
@@ -10,6 +15,11 @@ Directory.Build.props
 *.suo
 *.userprefs
 *.log
+*.binlog
+*.trx
+*.coverage
+*.coveragexml
+*.pdb
 *.nupkg
 *.snupkg
 *.ymme

@@ -7,5 +7,8 @@
 *.md text eol=lf
 *.ps1 text eol=crlf
 
+# 配布パッケージ作成用スクリプトは、リポジトリの言語統計から除外します。
+scripts/package.ps1 -linguist-detectable
+
 *.dll binary
 *.ymme binary
