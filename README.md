@@ -37,6 +37,23 @@
 └─ zh-TW\SequenceTIFFPlugin.resources.dll
 ```
 
+## 動作要件
+
+- OS: Windows 10 / 11 64-bit
+- ゆっくりMovieMaker4 （最新版を推奨）
+- ランタイム: .NET 10.0
+
+## 対応言語
+
+- 日本語 (ja-jp)
+- 英語 (en-us)
+- 簡体字中国語 (zh-cn)
+- 繁体字中国語 (zh-tw)
+- 韓国語 (ko-kr)
+- アラビア語 (ar-sa)
+- インドネシア語 (id-id)
+- スペイン語 (es-es)
+
 ## ビルド
 
 必要なもの:
@@ -64,9 +81,11 @@ dotnet build -c Release -p:YMM4DirPath="C:\Path\To\YukkuriMovieMaker4\"
 ```
 
 ## 注意事項
-
-- EXO出力には対応していません。YMM4からの動画出力では使用できます。
-- TIFFはWindows Imaging Component (WIC) でデコードし、描画時に32bit premultiplied BGRAへ変換します。
+> [!IMPORTANT]
+> - Exo出力には対応していません。YMM4からの動画出力でのみ使用できます。
+> - TIFF は Windows Imaging Component (WIC) でデコードし、描画時に 32bit premultiplied BGRA へ変換します。
+> - 作者は､本プラグインの利用に起因するいかなる損害についても､一切の責任を負いません｡
+> - プラグインの制作には Codex を使用しています。人間によるテストを十分に行っていますが、不安な方は各自でソースコードの確認をお願いします。
 
 ## ライセンス
 
