@@ -7,10 +7,17 @@
   <data name="PluginName" xml:space="preserve"><value>TIFF 圖片序列</value></data>
   <data name="FirstFileName" xml:space="preserve"><value>第一個圖片檔案</value></data>
   <data name="FirstFileDescription" xml:space="preserve"><value>將檔名結尾的數字視為序號，並依數字順序載入同一資料夾中的 TIFF 圖片。</value></data>
+  <data name="PageName" xml:space="preserve"><value>頁面</value></data>
+  <data name="PageDescription" xml:space="preserve"><value>以從 1 開始的編號指定每個多頁 TIFF 要顯示的頁面。</value></data>
+  <data name="PageUnit" xml:space="preserve"><value>頁</value></data>
   <data name="PlaybackStartName" xml:space="preserve"><value>播放開始位置</value></data>
   <data name="PlaybackStartDescription" xml:space="preserve"><value>以從 1 開始的編號指定從序列中的第幾張圖片開始播放。</value></data>
   <data name="FrameRateName" xml:space="preserve"><value>影格率</value></data>
   <data name="FrameRateDescription" xml:space="preserve"><value>指定每秒顯示的 TIFF 序列圖片張數。</value></data>
+  <data name="LoopName" xml:space="preserve"><value>循環播放</value></data>
+  <data name="LoopDescription" xml:space="preserve"><value>從循環起始影格到結束影格重複播放。</value></data>
+  <data name="LoopEndFrameName" xml:space="preserve"><value>循環結束影格</value></data>
+  <data name="LoopEndFrameDescription" xml:space="preserve"><value>指定循環的最後一個影格。設為 0 時使用序列的最後一張圖片。</value></data>
   <data name="FrameUnit" xml:space="preserve"><value>影格</value></data>
   <data name="FpsUnit" xml:space="preserve"><value>fps</value></data>
   <data name="TiffFilterName" xml:space="preserve"><value>TIFF 圖片</value></data>

@@ -7,10 +7,17 @@
   <data name="PluginName" xml:space="preserve"><value>Secuencia de imágenes TIFF</value></data>
   <data name="FirstFileName" xml:space="preserve"><value>Primer archivo de imagen</value></data>
   <data name="FirstFileDescription" xml:space="preserve"><value>Interpreta los dígitos finales del nombre del archivo como número de secuencia y carga las imágenes TIFF de la misma carpeta en orden numérico.</value></data>
+  <data name="PageName" xml:space="preserve"><value>Página</value></data>
+  <data name="PageDescription" xml:space="preserve"><value>Selecciona la página que se mostrará de cada TIFF multipágina; la numeración empieza en 1.</value></data>
+  <data name="PageUnit" xml:space="preserve"><value>página</value></data>
   <data name="PlaybackStartName" xml:space="preserve"><value>Inicio de reproducción</value></data>
   <data name="PlaybackStartDescription" xml:space="preserve"><value>Indica desde qué imagen de la secuencia se inicia la reproducción; la numeración empieza en 1.</value></data>
   <data name="FrameRateName" xml:space="preserve"><value>Velocidad de fotogramas</value></data>
   <data name="FrameRateDescription" xml:space="preserve"><value>Establece el número de imágenes de la secuencia TIFF que se muestran por segundo.</value></data>
+  <data name="LoopName" xml:space="preserve"><value>Bucle</value></data>
+  <data name="LoopDescription" xml:space="preserve"><value>Repite la reproducción desde el fotograma inicial hasta el fotograma final del bucle.</value></data>
+  <data name="LoopEndFrameName" xml:space="preserve"><value>Fotograma final del bucle</value></data>
+  <data name="LoopEndFrameDescription" xml:space="preserve"><value>Establece el último fotograma del bucle. Usa 0 para utilizar la última imagen de la secuencia.</value></data>
   <data name="FrameUnit" xml:space="preserve"><value>fotograma</value></data>
   <data name="FpsUnit" xml:space="preserve"><value>fps</value></data>
   <data name="TiffFilterName" xml:space="preserve"><value>Imágenes TIFF</value></data>

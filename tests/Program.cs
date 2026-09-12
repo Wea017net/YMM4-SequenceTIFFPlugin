@@ -59,7 +59,8 @@ Run("素材枚数とfpsからアイテム長を切り上げ計算", () =>
 {
     Equal(100, SequenceTimelineMath.GetItemLength(100, 30, 30));
     Equal(125, SequenceTimelineMath.GetItemLength(100, 30, 24));
-    Equal(2, SequenceTimelineMath.GetItemLength(1, 30, 24));
+    Equal(30, SequenceTimelineMath.GetItemLength(1, 30, 24));
+    Equal(60, SequenceTimelineMath.GetItemLength(2, 60, 30));
 });
 
 Run("ContentOffsetで分割後の再生位置を復元", () =>
@@ -70,6 +71,22 @@ Run("ContentOffsetで分割後の再生位置を復元", () =>
     offset += TimeSpan.FromSeconds(10d / 30d);
     Equal(11, SequenceTimelineMath.GetPlaybackStart(offset, 100, 30));
     Equal(11, SequenceTimelineMath.AdvancePlaybackStart(1, 10, 30, 30));
+});
+
+Run("末尾または指定フレームでループ", () =>
+{
+    Equal(0, SequenceFrameMapper.GetSequenceIndex(10, 30, 30, 1, 10, true));
+    Equal(2, SequenceFrameMapper.GetSequenceIndex(2, 30, 30, 1, 10, true, 1, 3));
+    Equal(0, SequenceFrameMapper.GetSequenceIndex(3, 30, 30, 1, 10, true, 1, 3));
+    Equal(3, SequenceFrameMapper.GetSequenceIndex(0, 30, 30, 7, 10, true, 3, 5));
+    Equal(3, SequenceFrameMapper.GetSequenceIndex(3, 30, 30, 4, 10, true, 4, 6));
+});
+
+Run("ループ終了フレームを有効範囲へ補正", () =>
+{
+    Equal(10, SequenceFrameMapper.GetLoopEndFrame(10, 1, 0));
+    Equal(7, SequenceFrameMapper.GetLoopEndFrame(10, 7, 3));
+    Equal(10, SequenceFrameMapper.GetLoopEndFrame(10, 1, 99));
 });
 
 Run("YMM4対応8言語のリソースを切り替え", () =>
@@ -90,7 +107,8 @@ Run("YMM4対応8言語のリソースを切り替え", () =>
     {
         "PluginName", "FirstFileName", "FirstFileDescription", "PlaybackStartName",
         "PlaybackStartDescription", "FrameRateName", "FrameRateDescription",
-        "FrameUnit", "FpsUnit", "TiffFilterName",
+        "PageName", "PageDescription", "PageUnit", "LoopName", "LoopDescription",
+        "LoopEndFrameName", "LoopEndFrameDescription", "FrameUnit", "FpsUnit", "TiffFilterName",
     };
 
     foreach (var (fileName, expectedName) in expectedNames)
@@ -99,7 +117,7 @@ Run("YMM4対応8言語のリソースを切り替え", () =>
         var values = document.Root!
             .Elements("data")
             .ToDictionary(x => (string)x.Attribute("name")!, x => (string)x.Element("value")!);
-        Equal(10, values.Count);
+        Equal(17, values.Count);
         Equal(true, requiredKeys.SetEquals(values.Keys));
         Equal(expectedName, values["PluginName"]);
     }
@@ -111,7 +129,7 @@ if (failures.Count > 0)
     return 1;
 }
 
-Console.WriteLine("8 smoke tests passed.");
+Console.WriteLine("10 smoke tests passed.");
 return 0;
 
 void Run(string name, Action test)

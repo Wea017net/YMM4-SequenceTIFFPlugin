@@ -19,10 +19,17 @@ public static class Resource
     public static string PluginName => Get(nameof(PluginName));
     public static string FirstFileName => Get(nameof(FirstFileName));
     public static string FirstFileDescription => Get(nameof(FirstFileDescription));
+    public static string PageName => Get(nameof(PageName));
+    public static string PageDescription => Get(nameof(PageDescription));
+    public static string PageUnit => Get(nameof(PageUnit));
     public static string PlaybackStartName => Get(nameof(PlaybackStartName));
     public static string PlaybackStartDescription => Get(nameof(PlaybackStartDescription));
     public static string FrameRateName => Get(nameof(FrameRateName));
     public static string FrameRateDescription => Get(nameof(FrameRateDescription));
+    public static string LoopName => Get(nameof(LoopName));
+    public static string LoopDescription => Get(nameof(LoopDescription));
+    public static string LoopEndFrameName => Get(nameof(LoopEndFrameName));
+    public static string LoopEndFrameDescription => Get(nameof(LoopEndFrameDescription));
     public static string FrameUnit => Get(nameof(FrameUnit));
     public static string FpsUnit => Get(nameof(FpsUnit));
     public static string TiffFilterName => Get(nameof(TiffFilterName));

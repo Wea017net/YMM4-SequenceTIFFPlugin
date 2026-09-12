@@ -15,6 +15,7 @@ internal sealed class SequenceTiffShapeSource : IShapeSource
     private string resolvedFirstFile = string.Empty;
     private IReadOnlyList<string> sequenceFiles = [];
     private int displayedIndex = -1;
+    private int displayedPage = -1;
     private ID2D1Bitmap? bitmap;
     private ID2D1CommandList? commandList;
     private bool disposed;
@@ -41,6 +42,7 @@ internal sealed class SequenceTiffShapeSource : IShapeSource
             sequenceFiles = SequenceFileResolver.Resolve(firstFile);
             resolvedFirstFile = firstFile;
             displayedIndex = -1;
+            displayedPage = -1;
         }
 
         var nextIndex = SequenceFrameMapper.GetSequenceIndex(
@@ -48,22 +50,27 @@ internal sealed class SequenceTiffShapeSource : IShapeSource
             timelineItemSourceDescription.FPS,
             parameter.FrameRate,
             parameter.GetEffectivePlaybackStart(timelineItemSourceDescription, sequenceFiles.Count),
-            sequenceFiles.Count);
+            sequenceFiles.Count,
+            parameter.IsLooped,
+            parameter.LoopOriginFrame,
+            parameter.LoopEndFrame);
+        var nextPage = parameter.Page;
 
-        if (commandList is not null && nextIndex == displayedIndex)
+        if (commandList is not null && nextIndex == displayedIndex && nextPage == displayedPage)
             return;
 
-        Render(nextIndex);
+        Render(nextIndex, nextPage);
         // 読み込みに失敗したフレームは次回のUpdateで再試行します。
         displayedIndex = nextIndex < 0 || bitmap is not null ? nextIndex : int.MinValue;
+        displayedPage = nextIndex < 0 || bitmap is not null ? nextPage : int.MinValue;
     }
 
-    private void Render(int index)
+    private void Render(int index, int page)
     {
         var dc = devices.DeviceContext;
 
         bitmap?.Dispose();
-        bitmap = index >= 0 ? TryLoadBitmap(sequenceFiles[index]) : null;
+        bitmap = index >= 0 ? TryLoadBitmap(sequenceFiles[index], page) : null;
 
         commandList?.Dispose();
         commandList = dc.CreateCommandList();
@@ -100,7 +107,7 @@ internal sealed class SequenceTiffShapeSource : IShapeSource
         }
     }
 
-    private ID2D1Bitmap? TryLoadBitmap(string filePath)
+    private ID2D1Bitmap? TryLoadBitmap(string filePath, int page)
     {
         try
         {
@@ -112,7 +119,8 @@ internal sealed class SequenceTiffShapeSource : IShapeSource
                 FileShare.ReadWrite | FileShare.Delete);
             using var wicStream = factory.CreateStream(stream);
             using var decoder = factory.CreateDecoderFromStream(wicStream);
-            using var decodedFrame = decoder.GetFrame(0);
+            var pageIndex = Math.Clamp(page - 1, 0, Math.Max(0, decoder.FrameCount - 1));
+            using var decodedFrame = decoder.GetFrame(pageIndex);
             using var converter = factory.CreateFormatConverter();
 
             converter.Initialize(

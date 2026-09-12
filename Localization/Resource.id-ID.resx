@@ -7,10 +7,17 @@
   <data name="PluginName" xml:space="preserve"><value>Urutan Gambar TIFF</value></data>
   <data name="FirstFileName" xml:space="preserve"><value>File gambar pertama</value></data>
   <data name="FirstFileDescription" xml:space="preserve"><value>Menganggap angka di akhir nama file sebagai nomor urut, lalu memuat gambar TIFF dalam folder yang sama berdasarkan urutan angka.</value></data>
+  <data name="PageName" xml:space="preserve"><value>Halaman</value></data>
+  <data name="PageDescription" xml:space="preserve"><value>Menentukan halaman yang ditampilkan dari setiap TIFF multihalaman, dimulai dari 1.</value></data>
+  <data name="PageUnit" xml:space="preserve"><value>halaman</value></data>
   <data name="PlaybackStartName" xml:space="preserve"><value>Posisi mulai pemutaran</value></data>
   <data name="PlaybackStartDescription" xml:space="preserve"><value>Menentukan gambar keberapa sebagai awal pemutaran urutan, dimulai dari 1.</value></data>
   <data name="FrameRateName" xml:space="preserve"><value>Laju bingkai</value></data>
   <data name="FrameRateDescription" xml:space="preserve"><value>Menentukan jumlah gambar urutan TIFF yang ditampilkan per detik.</value></data>
+  <data name="LoopName" xml:space="preserve"><value>Putar berulang</value></data>
+  <data name="LoopDescription" xml:space="preserve"><value>Mengulang pemutaran dari bingkai awal hingga bingkai akhir perulangan.</value></data>
+  <data name="LoopEndFrameName" xml:space="preserve"><value>Bingkai akhir perulangan</value></data>
+  <data name="LoopEndFrameDescription" xml:space="preserve"><value>Menentukan bingkai terakhir dalam perulangan. Gunakan 0 untuk memakai gambar terakhir dalam urutan.</value></data>
   <data name="FrameUnit" xml:space="preserve"><value>bingkai</value></data>
   <data name="FpsUnit" xml:space="preserve"><value>fps</value></data>
   <data name="TiffFilterName" xml:space="preserve"><value>Gambar TIFF</value></data>

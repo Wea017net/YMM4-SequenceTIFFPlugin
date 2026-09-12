@@ -4,13 +4,14 @@ internal static class SequenceTimelineMath
 {
     public static int GetItemLength(int fileCount, int timelineFrameRate, int sequenceFrameRate)
     {
-        if (fileCount <= 0)
-            return 1;
-
         var timelineFps = Math.Max(1, timelineFrameRate);
+        if (fileCount <= 0)
+            return timelineFps;
+
         var sequenceFps = Math.Clamp(sequenceFrameRate, 1, 240);
         var numerator = (long)fileCount * timelineFps;
-        return (int)Math.Clamp((numerator + sequenceFps - 1) / sequenceFps, 1L, int.MaxValue);
+        var sequenceLength = (numerator + sequenceFps - 1) / sequenceFps;
+        return (int)Math.Clamp(Math.Max(sequenceLength, timelineFps), 1L, int.MaxValue);
     }
 
     public static TimeSpan GetContentOffset(int playbackStart, int fileCount, int sequenceFrameRate)

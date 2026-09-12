@@ -14,8 +14,12 @@ namespace SequenceTIFFPlugin;
 internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
 {
     private string firstFile = string.Empty;
+    private int page = 1;
     private int playbackStart = 1;
     private int frameRate = 30;
+    private bool isLooped;
+    private int loopEndFrame;
+    private int loopOriginFrame = 1;
     private bool timelineMetadataInitialized;
     private int timelineAnchorFrame;
     private bool synchronizingFromOwner;
@@ -42,12 +46,32 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
     public string FirstFile
     {
         get => firstFile;
-        set => Set(ref firstFile, value ?? string.Empty);
+        set
+        {
+            var normalizedValue = value ?? string.Empty;
+            var wasEmpty = string.IsNullOrWhiteSpace(firstFile);
+            if (Set(ref firstFile, normalizedValue))
+                OnFileSelectionCommitted(wasEmpty);
+        }
+    }
+
+    [Display(
+        Name = nameof(Resource.PageName),
+        Order = 1,
+        Description = nameof(Resource.PageDescription),
+        ResourceType = typeof(Resource))]
+    [TextBoxSlider("F0", nameof(Resource.PageUnit), 1, 100, ResourceType = typeof(Resource))]
+    [DefaultValue(1)]
+    [Range(1, int.MaxValue)]
+    public int Page
+    {
+        get => page;
+        set => Set(ref page, Math.Max(1, value));
     }
 
     [Display(
         Name = nameof(Resource.PlaybackStartName),
-        Order = 1,
+        Order = 2,
         Description = nameof(Resource.PlaybackStartDescription),
         ResourceType = typeof(Resource))]
     [TextBoxSlider("F0", nameof(Resource.FrameUnit), 1, 1000, ResourceType = typeof(Resource))]
@@ -59,13 +83,16 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
         set
         {
             if (Set(ref playbackStart, Math.Max(1, value)) && !synchronizingFromOwner)
+            {
+                LoopOriginFrame = playbackStart;
                 UpdateOwnerContentOffset();
+            }
         }
     }
 
     [Display(
         Name = nameof(Resource.FrameRateName),
-        Order = 2,
+        Order = 3,
         Description = nameof(Resource.FrameRateDescription),
         ResourceType = typeof(Resource))]
     [TextBoxSlider("F0", nameof(Resource.FpsUnit), 1, 120, ResourceType = typeof(Resource))]
@@ -77,6 +104,45 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
         set
         {
             if (Set(ref frameRate, Math.Clamp(value, 1, 240)))
+                UpdateOwnerContentOffset();
+        }
+    }
+
+    [Display(
+        Name = nameof(Resource.LoopName),
+        Order = 4,
+        Description = nameof(Resource.LoopDescription),
+        ResourceType = typeof(Resource))]
+    [ToggleSlider]
+    [DefaultValue(false)]
+    public bool IsLooped
+    {
+        get => isLooped;
+        set
+        {
+            if (!Set(ref isLooped, value))
+                return;
+
+            if (value && !synchronizingFromOwner)
+                LoopOriginFrame = PlaybackStart;
+            UpdateOwnerContentOffset();
+        }
+    }
+
+    [Display(
+        Name = nameof(Resource.LoopEndFrameName),
+        Order = 5,
+        Description = nameof(Resource.LoopEndFrameDescription),
+        ResourceType = typeof(Resource))]
+    [TextBoxSlider("F0", nameof(Resource.FrameUnit), 0, 1000, ResourceType = typeof(Resource))]
+    [DefaultValue(0)]
+    [Range(0, int.MaxValue)]
+    public int LoopEndFrame
+    {
+        get => loopEndFrame;
+        set
+        {
+            if (Set(ref loopEndFrame, Math.Max(0, value)))
                 UpdateOwnerContentOffset();
         }
     }
@@ -95,6 +161,13 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
     {
         get => timelineAnchorFrame;
         set => timelineAnchorFrame = value;
+    }
+
+    [Browsable(false)]
+    public int LoopOriginFrame
+    {
+        get => loopOriginFrame;
+        set => loopOriginFrame = Math.Max(1, value);
     }
 
     public override IShapeSource CreateShapeSource(IGraphicsDevicesAndContext devices)
@@ -120,12 +193,23 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
             return;
 
         FirstFile = data.FirstFile;
+        Page = data.Page;
         PlaybackStart = data.PlaybackStart;
         FrameRate = data.FrameRate;
+        IsLooped = data.IsLooped;
+        LoopEndFrame = data.LoopEndFrame;
+        LoopOriginFrame = data.LoopOriginFrame;
     }
 
     protected override void SaveSharedData(SharedDataStore store)
-        => store.Save(new SharedData(FirstFile, PlaybackStart, FrameRate));
+        => store.Save(new SharedData(
+            FirstFile,
+            Page,
+            PlaybackStart,
+            FrameRate,
+            IsLooped,
+            LoopEndFrame,
+            LoopOriginFrame));
 
     internal int CurrentTimelineFrameRate => videoFPS > 0 ? videoFPS : 30;
 
@@ -205,7 +289,7 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
         {
             return SequenceTimelineMath.GetPlaybackStart(
                 SequenceTiffItemCoordinator.GetContentOffset(owner),
-                fileCount,
+                GetContentEndFrame(fileCount),
                 FrameRate);
         }
 
@@ -243,14 +327,32 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
 
         var start = SequenceTimelineMath.GetPlaybackStart(
             SequenceTiffItemCoordinator.GetContentOffset(owner),
-            fileCount,
+            GetContentEndFrame(fileCount),
             FrameRate);
+
+        if (IsLooped)
+        {
+            start = SequenceFrameMapper.NormalizeLoopFrame(
+                start,
+                fileCount,
+                LoopOriginFrame,
+                LoopEndFrame);
+        }
 
         synchronizingFromOwner = true;
         try
         {
             SetWithoutUndoRedo(ref playbackStart, start, nameof(PlaybackStart));
             TimelineAnchorFrame = SequenceTiffItemCoordinator.GetFrame(owner);
+            if (IsLooped)
+            {
+                SequenceTiffItemCoordinator.SetContentOffset(
+                    owner,
+                    SequenceTimelineMath.GetContentOffset(
+                        start,
+                        GetContentEndFrame(fileCount),
+                        FrameRate));
+            }
         }
         finally
         {
@@ -268,7 +370,10 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
             return;
 
         TimelineMetadataInitialized = true;
-        var offset = SequenceTimelineMath.GetContentOffset(PlaybackStart, fileCount, FrameRate);
+        var offset = SequenceTimelineMath.GetContentOffset(
+            PlaybackStart,
+            GetContentEndFrame(fileCount),
+            FrameRate);
 
         synchronizingFromOwner = true;
         try
@@ -280,6 +385,11 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
             synchronizingFromOwner = false;
         }
     }
+
+    private int GetContentEndFrame(int fileCount)
+        => IsLooped
+            ? SequenceFrameMapper.GetLoopEndFrame(fileCount, LoopOriginFrame, LoopEndFrame)
+            : fileCount;
 
     private bool TryGetOwner(out object owner)
     {
@@ -296,14 +406,29 @@ internal sealed class SequenceTiffShapeParameter : ShapeParameterBase
     private sealed class SharedData
     {
         public string FirstFile { get; }
+        public int Page { get; }
         public int PlaybackStart { get; }
         public int FrameRate { get; }
+        public bool IsLooped { get; }
+        public int LoopEndFrame { get; }
+        public int LoopOriginFrame { get; }
 
-        public SharedData(string firstFile, int playbackStart, int frameRate)
+        public SharedData(
+            string firstFile,
+            int page,
+            int playbackStart,
+            int frameRate,
+            bool isLooped,
+            int loopEndFrame,
+            int loopOriginFrame)
         {
             FirstFile = firstFile;
+            Page = page;
             PlaybackStart = playbackStart;
             FrameRate = frameRate;
+            IsLooped = isLooped;
+            LoopEndFrame = loopEndFrame;
+            LoopOriginFrame = loopOriginFrame;
         }
     }
 }

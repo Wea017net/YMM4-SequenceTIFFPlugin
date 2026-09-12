@@ -7,10 +7,17 @@
   <data name="PluginName" xml:space="preserve"><value>TIFF Image Sequence</value></data>
   <data name="FirstFileName" xml:space="preserve"><value>First image file</value></data>
   <data name="FirstFileDescription" xml:space="preserve"><value>Uses the trailing number in the file name as the sequence number and loads TIFF images in the same folder in numeric order.</value></data>
+  <data name="PageName" xml:space="preserve"><value>Page</value></data>
+  <data name="PageDescription" xml:space="preserve"><value>Selects the page to display from each multi-page TIFF, using numbering that begins at 1.</value></data>
+  <data name="PageUnit" xml:space="preserve"><value>page</value></data>
   <data name="PlaybackStartName" xml:space="preserve"><value>Playback start</value></data>
   <data name="PlaybackStartDescription" xml:space="preserve"><value>Selects the image where sequence playback starts, using numbering that begins at 1.</value></data>
   <data name="FrameRateName" xml:space="preserve"><value>Frame rate</value></data>
   <data name="FrameRateDescription" xml:space="preserve"><value>Sets the number of TIFF sequence images displayed per second.</value></data>
+  <data name="LoopName" xml:space="preserve"><value>Loop</value></data>
+  <data name="LoopDescription" xml:space="preserve"><value>Repeats playback from the loop start frame through the loop end frame.</value></data>
+  <data name="LoopEndFrameName" xml:space="preserve"><value>Loop end frame</value></data>
+  <data name="LoopEndFrameDescription" xml:space="preserve"><value>Sets the final frame of the loop. Set to 0 to use the final image in the sequence.</value></data>
   <data name="FrameUnit" xml:space="preserve"><value>frame</value></data>
   <data name="FpsUnit" xml:space="preserve"><value>fps</value></data>
   <data name="TiffFilterName" xml:space="preserve"><value>TIFF images</value></data>

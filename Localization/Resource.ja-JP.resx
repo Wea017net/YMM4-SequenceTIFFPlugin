@@ -7,10 +7,17 @@
   <data name="PluginName" xml:space="preserve"><value>連番TIFF画像</value></data>
   <data name="FirstFileName" xml:space="preserve"><value>1枚目のファイル</value></data>
   <data name="FirstFileDescription" xml:space="preserve"><value>ファイル名末尾の数字を連番として、同じフォルダーのTIFF画像を数値順に読み込みます。</value></data>
+  <data name="PageName" xml:space="preserve"><value>ページ</value></data>
+  <data name="PageDescription" xml:space="preserve"><value>マルチページTIFFから表示するページを1始まりで指定します。</value></data>
+  <data name="PageUnit" xml:space="preserve"><value>ページ</value></data>
   <data name="PlaybackStartName" xml:space="preserve"><value>再生開始位置</value></data>
   <data name="PlaybackStartDescription" xml:space="preserve"><value>連番画像の何枚目から再生を開始するかを1始まりで指定します。</value></data>
   <data name="FrameRateName" xml:space="preserve"><value>フレームレート</value></data>
   <data name="FrameRateDescription" xml:space="preserve"><value>連番TIFFを1秒間に何枚進めるかを整数で指定します。</value></data>
+  <data name="LoopName" xml:space="preserve"><value>ループ</value></data>
+  <data name="LoopDescription" xml:space="preserve"><value>ループの開始フレームから終了フレームまでを繰り返し再生します。</value></data>
+  <data name="LoopEndFrameName" xml:space="preserve"><value>ループ終了フレーム</value></data>
+  <data name="LoopEndFrameDescription" xml:space="preserve"><value>ループの最終フレームを指定します。0の場合は連番の最後の画像を使用します。</value></data>
   <data name="FrameUnit" xml:space="preserve"><value>フレーム</value></data>
   <data name="FpsUnit" xml:space="preserve"><value>fps</value></data>
   <data name="TiffFilterName" xml:space="preserve"><value>TIFF画像</value></data>
